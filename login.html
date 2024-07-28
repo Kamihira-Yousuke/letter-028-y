@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログインフォーム</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f0f0f0, #d0d0d0);
+        }
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333333;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555555;
+        }
+        input[type="text"], 
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cccccc;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        input[type="text"]:focus, 
+        input[type="password"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>ログイン</h2>
+        <form id="loginForm">
+            <div>
+                <label for="username">NAME</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="password">PASSWORD</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">LOGIN</button>
+            <p id="error-message" class="error-message"></p>
+        </form>
+    </div>
+
+    <script>
+        // document.getElementById('loginForm').addEventListener('submit', function(event) {
+        //     event.preventDefault(); // フォームのデフォルト送信を防ぐ
+
+        //     // 入力された名前とパスワードを取得
+        //     const username = document.getElementById('username').value;
+        //     const password = document.getElementById('password').value;
+
+        //     // 確認する名前とパスワード
+        //     const validUsername = 'yuzu';
+        //     const validPassword = '20240728';
+
+        //     // エラーメッセージ要素
+        //     const errorMessageElement = document.getElementById('error-message');
+
+        //     if (username === validUsername && password === validPassword) {
+        //         // 正しい場合、指定のページにリダイレクト
+        //         window.location.href = 'index.html'; // リダイレクト先のURL
+        //     } else {
+        //         // 間違っている場合、エラーメッセージを表示
+        //         errorMessageElement.textContent = '名前またはパスワードが正しくありません。';
+        //     }
+        // });
+
+    const validUsername = 'admin';
+    const validPassword = '20240728'; // ハードコーディングはセキュリティ的に好ましくありません
+
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // フォームのデフォルトの送信動作を防ぐ
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (username === validUsername && password === validPassword) {
+        // 正しいユーザー名とパスワードの場合、index.htmlにリダイレクト
+        localStorage.setItem('loggedIn', 'true');
+        window.location.href = 'index.html';
+      } else {
+        // ユーザー名またはパスワードが間違っている場合、エラーメッセージを表示
+        document.getElementById('error-message').style.display = 'block';
+      }
+    });
+    </script>
+</body>
+</html>

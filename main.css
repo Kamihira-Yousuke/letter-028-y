@@ -1,0 +1,348 @@
+body {
+  margin: 0;
+  font-family: 'Kosugi Maru', sans-serif;
+  color: #895e29;
+  line-height: 1.8em;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  /* スクロールを防ぐ */
+  position: relative;
+  background-color: #e2f2e4;
+  /* 画像が読み込まれるまでの背景色 */
+}
+
+/* 背景画像とオーバーレイの設定 */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('img/24588387_l.jpg');
+  background-size: cover;
+  /* 画面いっぱいに画像を広げる */
+  background-repeat: no-repeat;
+  /* 画像を繰り返さない */
+  background-position: center;
+  /* 画像の位置を中央に設定 */
+  background-attachment: fixed;
+  /* スクロールしても背景画像が固定される */
+  opacity: 0.5;
+  /* 背景画像の透明度を設定 */
+  z-index: -1;
+  /* 背景画像を後ろに配置 */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* アニメーションを適用するクラス */
+.fade-in {
+  animation: fadeIn 2s ease-in-out;
+  /* 2秒でフェードイン */
+}
+
+.receive, .send {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 4rem; /* パディングを調整 */
+  box-sizing: border-box;
+  margin: 2rem auto; /* マージンを調整 */
+  max-width: 800px; /* 最大幅を調整 */
+  /* background-color: #fff; */
+  border: 1px solid #ccc; /* ボーダーを追加 */
+  border-radius: 8px; /* ボーダー半径を追加 */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* ボックスシャドウを追加 */
+}
+
+@media screen and (max-width: 600px) {
+  .receive, .send {
+    padding: 1rem; /* モバイルビューでのパディング調整 */
+    max-width: 100%; /* モバイルビューでの最大幅調整 */
+  }
+}
+
+
+.text {
+  padding: 4rem 2rem;
+  background: #fffcf4;
+  border-radius: 4px;
+  font-size: 1rem;
+  line-height: 1.8em;
+  display: none;
+  transition: all .3s;
+  position: fixed;
+  top: 1.3rem; 
+  overflow: auto;
+  margin: 1rem;
+  z-index: 2;
+  max-width: 800px;
+  box-shadow: 0 0 16px rgba(209, 177, 137, 56%);
+  box-sizing: border-box;
+}
+
+.close-x {
+  cursor: pointer;
+  text-align: right;
+  display: block;
+  transform: translateY(-1em);
+  color: #f0485b;
+  font-weight: bold;
+}
+
+.message-close-x {
+  cursor: pointer;
+  text-align: right;
+  display: block;
+  color: #f0485b;
+  font-weight: bold;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+.pagetop {
+  height: 50px;
+  width: 50px;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  background: #fff;
+  border: solid 2px #000;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.pagetop__arrow {
+  height: 10px;
+  width: 10px;
+  border-top: 3px solid #000;
+  border-right: 3px solid #000;
+  transform: translateY(20%) rotate(-45deg);
+}
+
+.letter {
+  width: 80%;
+  position: relative;
+  height: calc(100vh - 2rem);
+  display: flex;
+  align-items: center;
+}
+
+.letter-img {
+  cursor: pointer;
+  width: 60%;
+  max-width: 200px;
+  margin: auto;
+  display: block;
+}
+
+.letter-svg {
+  overflow: initial;
+  width: 100%;
+}
+
+#text-check {
+  display: none;
+}
+
+#letter-top {
+  transition: all .6s;
+  transform-origin: 0 6%;
+}
+
+#text-check:checked~.letter #letter-top {
+  transform: rotateX(180deg) rotateZ(2deg);
+}
+
+#text-check:checked~.text {
+  display: block;
+  animation: letter-open .6s ease-in-out forwards;
+}
+
+@keyframes letter-open {
+  0% {
+    opacity: 0;
+  }
+
+  75% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.message {
+  background-image:
+    linear-gradient(180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0) 96%,
+      #ffead0 96%,
+      #ffead0 100%);
+  background-size: 100% 1.8em;
+}
+
+.message p {
+  margin-bottom: 1.8em;
+}
+
+.message-name {
+  text-align: right;
+}
+
+.message-name img {
+  width: 12rem;
+}
+
+@media screen and (max-width: 900px) {
+  .card-cover {
+    flex-wrap: wrap;
+    padding: 1rem 20px;
+  }
+
+  .text {
+    margin-bottom: 4rem;
+    top: 0;
+    height: calc(100vh - 2rem);
+    box-sizing: border-box;
+    left: 0;
+    right: 0;
+  }
+
+  .letter {
+    width: 100%;
+    height: auto;
+    /* margin-bottom: 2rem; */
+    display: flex;
+    flex-direction: column; /* 縦に並べる */
+    align-items: center; /* 中央揃え（オプション） */
+    justify-content: center; /* 中央揃え（オプション） */
+    /* height: 100vh; */
+  }
+}
+
+.messagebox {
+  display: none;
+  padding: 2rem;
+  max-height: 80vh;
+  width: calc(100% - 2rem);
+  box-sizing: border-box;
+  max-width: 800px;
+  background: #fffcf4;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  line-height: 1.8em;
+  position: absolute;
+  overflow: auto;
+  margin: 1rem;
+  z-index: 1;
+  box-shadow: 0 0 16px rgba(209, 177, 137, 56%);
+  animation: show .2s ease-out forwards;
+}
+
+@media screen and (max-width: 800px) {
+  .messagebox {
+    left: 0;
+    right: 0;
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.messagebox img {
+  max-width: 60vw;
+  min-width: 40%;
+  max-height: 50vh;
+  display: block;
+  margin: auto;
+}
+
+.visible {
+  display: block;
+}
+
+.tree {
+  padding: 0 5%;
+}
+
+.footer {
+  font-family: sans-serif;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  padding: 10px;
+  /* 必要に応じてパディングを追加 */
+}
+
+
+.tweet-button {
+  position: fixed;
+  width: 10vw;
+  min-width: 100px;
+  max-width: 200px;
+  right: 12px;
+  top: 12px;
+  transition: all .3s;
+}
+
+.tweet-button:hover {
+  opacity: .7;
+}
+
+.tweet-button-img {
+  width: 100%;
+}
+
+/* .view-message {
+  text-align: center; 
+  margin-top: 0;
+  padding-top: 0; 
+}
+
+.view-message a {
+  text-decoration: none; 
+  color: #007bff;
+  font-weight: bold; 
+}
+
+.view-message a:hover {
+  text-decoration: underline; 
+} */
+
+.reset {
+  cursor: pointer;
+  text-align: right;
+  display: block;
+  transform: translateY(-1em);
+  color: #f0485b;
+  font-weight: bold;
+  text-decoration: none;
+}
