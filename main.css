@@ -22,7 +22,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('img/24588387_l (1).jpg');
+  background-image: url('back.jpg');
   background-size: cover;
   /* 画面いっぱいに画像を広げる */
   background-repeat: no-repeat;
